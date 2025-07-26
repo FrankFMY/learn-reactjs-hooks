@@ -1,7 +1,7 @@
 {
   "name": "learn-reactjs-hooks",
   "private": true,
-  "version": "1.2.0",
+  "version": "2.1.2",
   "type": "module",
   "description": "Детальный гайд по хукам ReactJS с практическими примерами",
   "scripts": {
