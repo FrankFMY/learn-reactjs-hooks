@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
-import { ThemeProvider } from '../contexts/ThemeContext.jsx';
+import { ThemeProvider } from '../contexts/ThemeProvider';
 import App from '../App';
 
 const renderWithProviders = component => {

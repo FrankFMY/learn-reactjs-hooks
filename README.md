@@ -1,6 +1,7 @@
 # 🎣 Learn ReactJS Hooks
 
 [![React](https://img.shields.io/badge/React-19.1.0-61DAFB?logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-3178C6?logo=typescript)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-7.0.4-646CFF?logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4.17-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -77,6 +78,7 @@ Learn ReactJS Hooks — это интерактивная платформа д�
 ### Основной стек
 
 - **React 19.1.0** — современная библиотека для создания пользовательских интерфейсов
+- **TypeScript 5.8.3** — типизированный JavaScript для надежной разработки
 - **Vite 7.0.4** — быстрый инструмент сборки для современной веб-разработки
 - **React Router 6.30.1** — маршрутизация для React приложений
 - **Tailwind CSS 3.4.17** — utility-first CSS фреймворк
@@ -90,9 +92,11 @@ Learn ReactJS Hooks — это интерактивная платформа д�
 ### Инструменты разработки
 
 - **ESLint 9.30.1** — статический анализ кода
+- **Prettier 3.2.5** — форматирование кода
 - **Vitest 2.1.8** — современный тестовый фреймворк
 - **Testing Library** — утилиты для тестирования React компонентов
 - **PostCSS & Autoprefixer** — обработка CSS
+- **Husky & lint-staged** — Git hooks для качества кода
 
 ## 📝 Последние изменения
 
@@ -167,6 +171,12 @@ npm run test:ui
 # Проверка кода линтером
 npm run lint
 
+# Проверка TypeScript типов
+npm run type-check
+
+# Форматирование кода
+npm run format
+
 # Сборка для продакшена
 npm run build
 ```
@@ -176,49 +186,74 @@ npm run build
 ```
 learn-reactjs-hooks/
 ├── public/                 # Статические файлы
-│   └── vite.svg
+│   ├── vite.svg
+│   └── CNAME
 ├── src/
 │   ├── assets/            # Ресурсы (изображения, иконки)
 │   │   └── react.svg
 │   ├── components/        # React компоненты
-│   │   ├── CodeBlock.jsx      # Блок кода с подсветкой
-│   │   ├── CodeBlockDemo.jsx  # Демонстрация кода
-│   │   ├── CodeEditor.jsx     # Редактор кода
-│   │   ├── CodeOutput.jsx     # Вывод результата
-│   │   ├── Header.jsx         # Заголовок приложения
-│   │   ├── HooksStats.jsx     # Статистика хуков
-│   │   ├── LearningStats.jsx  # Статистика обучения
-│   │   ├── LiveExample.jsx    # Живые примеры
-│   │   ├── RelatedHooks.jsx   # Связанные хуки
-│   │   └── Sidebar.jsx        # Боковая панель
+│   │   ├── CodeBlock.tsx      # Блок кода с подсветкой
+│   │   ├── CodeBlockDemo.tsx  # Демонстрация кода
+│   │   ├── CodeEditor.tsx     # Редактор кода
+│   │   ├── CodeOutput.tsx     # Вывод результата
+│   │   ├── CopyButton.tsx     # Кнопка копирования
+│   │   ├── ErrorBoundary.tsx  # Граница ошибок
+│   │   ├── Header.tsx         # Заголовок приложения
+│   │   ├── HooksStats.tsx     # Статистика хуков
+│   │   ├── LanguageBadge.tsx  # Бейдж языка
+│   │   ├── LearningStats.tsx  # Статистика обучения
+│   │   ├── LiveExample.tsx    # Живые примеры
+│   │   ├── LoadingSpinner.tsx # Спиннер загрузки
+│   │   ├── RelatedHooks.tsx   # Связанные хуки
+│   │   ├── Sidebar.tsx        # Боковая панель
+│   │   └── SyntaxHighlighter.tsx # Подсветка синтаксиса
 │   ├── contexts/          # React контексты
-│   │   ├── ThemeContext.js    # Контекст темы
-│   │   └── ThemeContext.jsx   # Провайдер темы
+│   │   ├── ThemeContext.tsx   # Контекст темы
+│   │   └── ThemeProvider.tsx  # Провайдер темы
 │   ├── data/              # Данные приложения
-│   │   └── hooksData.js       # Данные о хуках
+│   │   ├── categories.ts      # Категории хуков
+│   │   ├── difficulties.ts    # Уровни сложности
+│   │   ├── hooks/             # Данные о хуках
+│   │   │   ├── index.ts
+│   │   │   └── useState/
+│   │   │       ├── examples.ts
+│   │   │       ├── index.ts
+│   │   │       └── metadata.ts
+│   │   ├── hooksData.js       # Данные о хуках (legacy)
+│   │   └── hooksData.ts       # Данные о хуках (TypeScript)
 │   ├── hooks/             # Кастомные хуки
-│   │   └── useTheme.js        # Хук для работы с темой
+│   │   └── useTheme.ts        # Хук для работы с темой
 │   ├── pages/             # Страницы приложения
-│   │   ├── ExamplesPage.jsx   # Страница примеров
-│   │   ├── HomePage.jsx       # Главная страница
-│   │   ├── HookDetailPage.jsx # Детальная страница хука
-│   │   ├── HooksListPage.jsx  # Список хуков
-│   │   ├── PracticePage.jsx   # Страница практики
-│   │   └── StatsPage.jsx      # Страница статистики
+│   │   ├── ExamplesPage.tsx   # Страница примеров
+│   │   ├── HomePage.tsx       # Главная страница
+│   │   ├── HookDetailPage.tsx # Детальная страница хука
+│   │   ├── HooksListPage.tsx  # Список хуков
+│   │   ├── PracticePage.tsx   # Страница практики
+│   │   └── StatsPage.tsx      # Страница статистики
 │   ├── styles/            # Стили
 │   │   └── codeblock.css      # Стили для блоков кода
 │   ├── test/              # Тесты
 │   │   ├── App.test.jsx       # Тесты приложения
-│   │   └── setup.js           # Настройка тестов
+│   │   ├── CodeBlock.test.tsx # Тесты компонента CodeBlock
+│   │   ├── ErrorBoundary.test.tsx # Тесты ErrorBoundary
+│   │   ├── setup.js            # Настройка тестов (legacy)
+│   │   └── setup.ts            # Настройка тестов (TypeScript)
+│   ├── types/             # TypeScript типы
+│   │   ├── global.d.ts        # Глобальные типы
+│   │   └── index.ts           # Основные типы
 │   ├── utils/             # Утилиты
-│   ├── App.jsx            # Главный компонент
+│   ├── App.tsx            # Главный компонент
 │   ├── index.css          # Глобальные стили
-│   └── main.jsx           # Точка входа
-├── .eslintrc.js          # Конфигурация ESLint
+│   └── main.tsx           # Точка входа
+├── .github/              # GitHub Actions
+│   └── workflows/
+│       └── ci.yml            # CI pipeline
+├── eslint.config.js      # Конфигурация ESLint
 ├── index.html            # HTML шаблон
 ├── package.json          # Зависимости и скрипты
 ├── postcss.config.js     # Конфигурация PostCSS
 ├── tailwind.config.js    # Конфигурация Tailwind CSS
+├── tsconfig.json         # Конфигурация TypeScript
 └── vite.config.js        # Конфигурация Vite
 ```
 
@@ -316,7 +351,14 @@ learn-reactjs-hooks/
    npm run lint
    ```
 
-3. **Запустите тесты**
+3. **Проверьте TypeScript типы**
+
+   ```bash
+   npm run type-check
+   ```
+
+4. **Запустите тесты**
+
    ```bash
    npm test
    ```
@@ -325,8 +367,9 @@ learn-reactjs-hooks/
 
 - **ESLint**: Строгие правила для качества кода
 - **Prettier**: Автоматическое форматирование
-- **TypeScript**: Типизация (планируется)
+- **TypeScript**: Строгая типизация
 - **Testing**: Покрытие тестами всех компонентов
+- **Husky**: Git hooks для автоматических проверок
 
 ### Git workflow
 
@@ -359,7 +402,7 @@ npm run test:ui
 npm test -- --watch
 
 # Покрытие кода
-npm test -- --coverage
+npm run test:coverage
 ```
 
 ### Структура тестов
@@ -370,7 +413,7 @@ npm test -- --coverage
 
 ### Пример теста
 
-```javascript
+```typescript
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import Counter from './Counter';
@@ -408,12 +451,16 @@ npm run preview
 - **Tree shaking**: Удаление неиспользуемого кода
 - **Minification**: Сжатие JavaScript и CSS
 - **Asset optimization**: Оптимизация изображений и ресурсов
+- **TypeScript compilation**: Компиляция в оптимизированный JavaScript
 
 ### Развертывание
 
 ```bash
 # Сборка для продакшена
 npm run build
+
+# Развертывание на GitHub Pages
+npm run deploy
 
 # Загрузка на сервер
 # (зависит от выбранной платформы)
@@ -447,7 +494,7 @@ npm run build
 
 ### 📝 Добавление новых хуков
 
-1. Добавьте данные в `src/data/hooksData.js`
+1. Добавьте данные в `src/data/hooksData.ts`
 2. Создайте компоненты для примеров
 3. Напишите тесты
 4. Обновите документацию
@@ -466,6 +513,7 @@ npm run build
 ## 🙏 Благодарности
 
 - **React Team** за создание отличной библиотеки
+- **TypeScript Team** за систему типов
 - **Vite Team** за быстрый инструмент сборки
 - **Tailwind CSS** за utility-first подход
 - **Сообщество** за вклад и поддержку

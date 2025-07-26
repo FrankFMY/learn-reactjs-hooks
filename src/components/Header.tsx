@@ -1,9 +1,9 @@
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { BookOpen, Github, Menu, Sun, Moon, Monitor } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
+import { HeaderProps } from '@/types';
 
-const Header = ({ onMenuToggle }) => {
+const Header = ({ onMenuToggle }: HeaderProps) => {
   const location = useLocation();
   const { toggleTheme, isDark, isSystem } = useTheme();
 
@@ -83,7 +83,7 @@ const Header = ({ onMenuToggle }) => {
 
             {/* GitHub Link */}
             <a
-              href="https://github.com"
+              href="https://github.com/FrankFMY/learn-reactjs-hooks"
               target="_blank"
               rel="noopener noreferrer"
               className="theme-toggle group"

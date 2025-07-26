@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Search,
-  Filter,
   Sparkles,
   TrendingUp,
   Clock,
@@ -33,11 +32,11 @@ const HooksListPage = () => {
     return true;
   });
 
-  const handleFilterChange = (key, value) => {
+  const handleFilterChange = (key: string, value: string) => {
     setFilters(prev => ({ ...prev, [key]: value }));
   };
 
-  const getDifficultyIcon = difficulty => {
+  const getDifficultyIcon = (difficulty: string) => {
     switch (difficulty) {
       case 'beginner':
         return <Sparkles className="h-4 w-4" />;
@@ -50,7 +49,7 @@ const HooksListPage = () => {
     }
   };
 
-  const getDifficultyColor = difficulty => {
+  const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'beginner':
         return 'bg-success-100 text-success-800 dark:bg-success-900/30 dark:text-success-300 border-success-200 dark:border-success-800';

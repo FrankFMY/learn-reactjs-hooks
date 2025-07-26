@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Play, RotateCcw, Copy, Check } from 'lucide-react';
+import { CodeEditorProps } from '@/types';
 
 const CodeEditor = ({
   initialCode,
   solution,
   onRun,
   title = 'Редактор кода',
-}) => {
+}: CodeEditorProps & { title?: string }) => {
   const [code, setCode] = useState(initialCode);
   const [isCopied, setIsCopied] = useState(false);
   const [showSolution, setShowSolution] = useState(false);

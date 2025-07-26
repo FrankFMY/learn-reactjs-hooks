@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import {
   CheckCircle,
   XCircle,
@@ -9,6 +8,7 @@ import {
   Clock,
 } from 'lucide-react';
 import CodeBlock from '../components/CodeBlock';
+import { useState } from 'react';
 
 const PracticePage = () => {
   const [currentExercise, setCurrentExercise] = useState(0);

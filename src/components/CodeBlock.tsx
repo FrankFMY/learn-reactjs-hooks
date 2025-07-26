@@ -4,17 +4,11 @@ import {
   tomorrow,
   dracula,
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import {
-  Copy,
-  Check,
-  Play,
-  ExternalLink,
-  FileCode,
-  Sparkles,
-} from 'lucide-react';
+import { Copy, Check, Play, FileCode, Sparkles } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
+import { CodeBlockProps } from '../types';
 
-const CodeBlock = ({
+const CodeBlock: React.FC<CodeBlockProps> = ({
   code,
   language = 'jsx',
   title,
@@ -38,8 +32,8 @@ const CodeBlock = ({
     }
   };
 
-  const getLanguageDisplayName = lang => {
-    const languageMap = {
+  const getLanguageDisplayName = (lang: string): string => {
+    const languageMap: Record<string, string> = {
       jsx: 'React JSX',
       js: 'JavaScript',
       tsx: 'TypeScript React',
@@ -53,8 +47,8 @@ const CodeBlock = ({
     return languageMap[lang] || lang.toUpperCase();
   };
 
-  const getLanguageColor = lang => {
-    const colorMap = {
+  const getLanguageColor = (lang: string): string => {
+    const colorMap: Record<string, string> = {
       jsx: 'bg-gradient-to-r from-blue-500 to-blue-600',
       js: 'bg-gradient-to-r from-yellow-500 to-yellow-600',
       tsx: 'bg-gradient-to-r from-blue-600 to-blue-700',
@@ -68,8 +62,8 @@ const CodeBlock = ({
     return colorMap[lang] || 'bg-gradient-to-r from-gray-500 to-gray-600';
   };
 
-  const getLanguageIcon = lang => {
-    const iconMap = {
+  const getLanguageIcon = (lang: string): string => {
+    const iconMap: Record<string, string> = {
       jsx: '⚛️',
       js: '🟨',
       tsx: '🔷',

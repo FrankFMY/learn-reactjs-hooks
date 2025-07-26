@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
   ArrowLeft,
@@ -6,7 +6,6 @@ import {
   Lightbulb,
   AlertTriangle,
   Code,
-  Play,
   Sparkles,
   TrendingUp,
   Clock,
@@ -24,7 +23,7 @@ const HookDetailPage = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [copied, setCopied] = useState(false);
 
-  const hook = getHookById(id);
+  const hook = getHookById(id || '');
 
   if (!hook) {
     return (
@@ -47,7 +46,7 @@ const HookDetailPage = () => {
   const category = categories.find(c => c.id === hook.category);
   const difficulty = difficulties.find(d => d.id === hook.difficulty);
 
-  const getDifficultyIcon = difficulty => {
+  const getDifficultyIcon = (difficulty: string) => {
     switch (difficulty) {
       case 'beginner':
         return <Sparkles className="h-4 w-4" />;
@@ -60,7 +59,7 @@ const HookDetailPage = () => {
     }
   };
 
-  const getDifficultyColor = difficulty => {
+  const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'beginner':
         return 'bg-success-100 text-success-800 dark:bg-success-900/30 dark:text-success-300 border-success-200 dark:border-success-800';

@@ -1,33 +1,39 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import HomePage from './pages/HomePage';
-import HooksListPage from './pages/HooksListPage';
-import HookDetailPage from './pages/HookDetailPage';
-import ExamplesPage from './pages/ExamplesPage';
-import PracticePage from './pages/PracticePage';
-import StatsPage from './pages/StatsPage';
+import Header from './components/Header.tsx';
+import Sidebar from './components/Sidebar.tsx';
+import HomePage from './pages/HomePage.tsx';
+import HooksListPage from './pages/HooksListPage.tsx';
+import HookDetailPage from './pages/HookDetailPage.tsx';
+import ExamplesPage from './pages/ExamplesPage.tsx';
+import PracticePage from './pages/PracticePage.tsx';
+import StatsPage from './pages/StatsPage.tsx';
+import { FilterOptions } from './types';
 import './index.css';
 
-function App() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [sidebarFilters, setSidebarFilters] = useState({
+function App(): React.JSX.Element {
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
+  const [sidebarFilters, setSidebarFilters] = useState<FilterOptions>({
     search: '',
     category: '',
     difficulty: '',
   });
 
-  const handleMenuToggle = () => {
+  const handleMenuToggle = (): void => {
     setSidebarOpen(!sidebarOpen);
   };
 
-  const handleSidebarClose = () => {
+  const handleSidebarClose = (): void => {
     setSidebarOpen(false);
   };
 
-  const handleSidebarFiltersChange = newFilters => {
+  const handleSidebarFiltersChange = (newFilters: FilterOptions): void => {
     setSidebarFilters(newFilters);
+  };
+
+  const handleSidebarToggle = (): void => {
+    setSidebarCollapsed(!sidebarCollapsed);
   };
 
   return (
@@ -39,14 +45,16 @@ function App() {
     >
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
         <Header onMenuToggle={handleMenuToggle} />
-        <div className="flex">
+        <div className="flex min-h-[calc(100vh-4rem)]">
           <Sidebar
             isOpen={sidebarOpen}
             onClose={handleSidebarClose}
             filters={sidebarFilters}
             onFiltersChange={handleSidebarFiltersChange}
+            collapsed={sidebarCollapsed}
+            onToggleCollapse={handleSidebarToggle}
           />
-          <main className="flex-1">
+          <main className="flex-1 w-full">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/hooks" element={<HooksListPage />} />

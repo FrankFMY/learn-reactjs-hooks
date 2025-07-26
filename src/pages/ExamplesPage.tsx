@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { hooksData, categories } from '../data/hooksData';
-import { Play, Code, ExternalLink, ArrowRight } from 'lucide-react';
+import { Code, ArrowRight } from 'lucide-react';
 import CodeBlock from '../components/CodeBlock';
 
 const ExamplesPage = () => {
@@ -16,42 +16,6 @@ const ExamplesPage = () => {
       hook.description.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
   });
-
-  const LiveExample = ({ example }) => {
-    const [isRunning, setIsRunning] = useState(false);
-
-    const runExample = () => {
-      setIsRunning(true);
-      // Здесь можно добавить логику для запуска примера
-      setTimeout(() => setIsRunning(false), 1000);
-    };
-
-    return (
-      <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 mb-4">
-        <div className="flex items-center justify-between mb-3">
-          <h4 className="font-semibold text-gray-900 dark:text-gray-100">
-            {example.title}
-          </h4>
-          <button
-            onClick={runExample}
-            disabled={isRunning}
-            className="flex items-center px-3 py-1 bg-green-600 text-white rounded-md text-sm hover:bg-green-700 disabled:opacity-50"
-          >
-            <Play className="h-4 w-4 mr-1" />
-            {isRunning ? 'Запуск...' : 'Запустить'}
-          </button>
-        </div>
-        <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
-          {example.description}
-        </p>
-        <div className="bg-gray-900 rounded-md p-4 overflow-x-auto">
-          <pre className="text-green-400 text-sm">
-            <code>{example.code}</code>
-          </pre>
-        </div>
-      </div>
-    );
-  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
