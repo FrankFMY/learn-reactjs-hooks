@@ -2,7 +2,7 @@ import React from 'react';
 import CodeBlock from './CodeBlock';
 
 const CodeBlockDemo = () => {
-    const sampleCode = `import React, { useState, useEffect } from 'react';
+  const sampleCode = `import React, { useState, useEffect } from 'react';
 
 // Кастомный хук для управления состоянием
 function useCounter(initialValue = 0) {
@@ -35,7 +35,7 @@ function Counter() {
 
 export default Counter;`;
 
-    const cssCode = `/* Стили для компонента счетчика */
+  const cssCode = `/* Стили для компонента счетчика */
 .counter {
     display: flex;
     flex-direction: column;
@@ -78,7 +78,7 @@ export default Counter;`;
     transform: translateY(0);
 }`;
 
-    const jsonCode = `{
+  const jsonCode = `{
     "name": "react-hooks-demo",
     "version": "1.0.0",
     "description": "Демонстрация кастомных React хуков",
@@ -112,41 +112,40 @@ export default Counter;`;
     }
 }`;
 
-    return (
-        <div className='p-8 space-y-8'>
-            <div className='text-center'>
-                <h1 className='text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4'>
-                    Демонстрация улучшенных стилей CodeBlock
-                </h1>
-                <p className='text-lg text-gray-600 dark:text-gray-300'>
-                    Теперь код легко читается в обеих темах с оптимальным
-                    контрастом
-                </p>
-            </div>
+  return (
+    <div className="p-8 space-y-8">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          Демонстрация улучшенных стилей CodeBlock
+        </h1>
+        <p className="text-lg text-gray-600 dark:text-gray-300">
+          Теперь код легко читается в обеих темах с оптимальным контрастом
+        </p>
+      </div>
 
-            <CodeBlock
-                code={sampleCode}
-                language='jsx'
-                title='Кастомный хук useCounter'
-                description='Пример создания и использования кастомного React хука для управления счетчиком'
-                liveExample={true}
-            />
+      <CodeBlock
+        code={sampleCode}
+        language="jsx"
+        title="Кастомный хук useCounter"
+        description="Пример создания и использования кастомного React хука для управления счетчиком"
+        liveExample={true}
+      />
 
-            <CodeBlock
-                code={cssCode}
-                language='css'
-                title='Стили для компонента'
-                description='CSS стили для красивого отображения компонента счетчика'
-            />
+      <CodeBlock
+        code={cssCode}
+        language="css"
+        title="Стили для компонента"
+        description="CSS стили для красивого отображения компонента счетчика"
+      />
 
-            <CodeBlock
-                code={jsonCode}
-                language='json'
-                title='package.json'
-                description='Конфигурация проекта с зависимостями и скриптами'
-            />
-        </div>
-    );
+      <CodeBlock
+        code={jsonCode}
+        language="json"
+        title="package.json"
+        description="Конфигурация проекта с зависимостями и скриптами"
+      />
+    </div>
+  );
 };
 
 export default CodeBlockDemo;

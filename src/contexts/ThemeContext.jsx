@@ -2,91 +2,91 @@ import React, { useEffect, useState } from 'react';
 import { ThemeContext } from './ThemeContext';
 
 export const ThemeProvider = ({ children }) => {
-    // Инициализируем тему из localStorage или используем системную
-    const getInitialTheme = () => {
-        if (typeof window !== 'undefined') {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                return savedTheme;
-            }
-        }
-        return 'system';
+  // Инициализируем тему из localStorage или используем системную
+  const getInitialTheme = () => {
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        return savedTheme;
+      }
+    }
+    return 'system';
+  };
+
+  const [theme, setTheme] = useState(getInitialTheme);
+  const [systemTheme, setSystemTheme] = useState('light');
+
+  // Определение системной темы
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    const handleChange = e => {
+      const newSystemTheme = e.matches ? 'dark' : 'light';
+      setSystemTheme(newSystemTheme);
+
+      // Если текущая тема - системная, обновляем её
+      if (theme === 'system') {
+        applyTheme(newSystemTheme);
+      }
     };
 
-    const [theme, setTheme] = useState(getInitialTheme);
-    const [systemTheme, setSystemTheme] = useState('light');
+    // Устанавливаем начальную системную тему
+    setSystemTheme(mediaQuery.matches ? 'dark' : 'light');
 
-    // Определение системной темы
-    useEffect(() => {
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    mediaQuery.addEventListener('change', handleChange);
 
-        const handleChange = (e) => {
-            const newSystemTheme = e.matches ? 'dark' : 'light';
-            setSystemTheme(newSystemTheme);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, [theme]);
 
-            // Если текущая тема - системная, обновляем её
-            if (theme === 'system') {
-                applyTheme(newSystemTheme);
-            }
-        };
+  // Применение темы к документу
+  const applyTheme = themeToApply => {
+    const root = document.documentElement;
 
-        // Устанавливаем начальную системную тему
-        setSystemTheme(mediaQuery.matches ? 'dark' : 'light');
+    if (themeToApply === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+  };
 
-        mediaQuery.addEventListener('change', handleChange);
+  // Обновление темы при её изменении
+  useEffect(() => {
+    const actualTheme = theme === 'system' ? systemTheme : theme;
+    applyTheme(actualTheme);
 
-        return () => mediaQuery.removeEventListener('change', handleChange);
-    }, [theme]);
+    // Сохраняем в localStorage только если тема не системная
+    if (theme !== 'system') {
+      localStorage.setItem('theme', theme);
+    }
+  }, [theme, systemTheme]);
 
-    // Применение темы к документу
-    const applyTheme = (themeToApply) => {
-        const root = document.documentElement;
+  const toggleTheme = () => {
+    setTheme(prev => {
+      if (prev === 'light') return 'dark';
+      if (prev === 'dark') return 'system';
+      return 'light';
+    });
+  };
 
-        if (themeToApply === 'dark') {
-            root.classList.add('dark');
-        } else {
-            root.classList.remove('dark');
-        }
-    };
+  const setThemeMode = mode => {
+    setTheme(mode);
+  };
 
-    // Обновление темы при её изменении
-    useEffect(() => {
-        const actualTheme = theme === 'system' ? systemTheme : theme;
-        applyTheme(actualTheme);
+  const getCurrentTheme = () => {
+    return theme === 'system' ? systemTheme : theme;
+  };
 
-        // Сохраняем в localStorage только если тема не системная
-        if (theme !== 'system') {
-            localStorage.setItem('theme', theme);
-        }
-    }, [theme, systemTheme]);
+  const value = {
+    theme,
+    systemTheme,
+    currentTheme: getCurrentTheme(),
+    toggleTheme,
+    setTheme: setThemeMode,
+    isDark: getCurrentTheme() === 'dark',
+    isSystem: theme === 'system',
+  };
 
-    const toggleTheme = () => {
-        setTheme((prev) => {
-            if (prev === 'light') return 'dark';
-            if (prev === 'dark') return 'system';
-            return 'light';
-        });
-    };
-
-    const setThemeMode = (mode) => {
-        setTheme(mode);
-    };
-
-    const getCurrentTheme = () => {
-        return theme === 'system' ? systemTheme : theme;
-    };
-
-    const value = {
-        theme,
-        systemTheme,
-        currentTheme: getCurrentTheme(),
-        toggleTheme,
-        setTheme: setThemeMode,
-        isDark: getCurrentTheme() === 'dark',
-        isSystem: theme === 'system',
-    };
-
-    return (
-        <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
-    );
+  return (
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+  );
 };

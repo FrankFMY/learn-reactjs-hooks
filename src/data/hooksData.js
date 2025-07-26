@@ -1,23 +1,22 @@
 // Данные для документации по хукам ReactJS
 
 export const hooksData = [
-    {
-        id: 'useState',
-        title: 'useState',
-        description:
-            'Хук для управления состоянием в функциональных компонентах',
-        category: 'state',
-        difficulty: 'beginner',
-        content: {
-            overview:
-                'useState позволяет добавлять состояние в функциональные компоненты. Он возвращает массив с текущим значением состояния и функцию для его обновления.',
-            syntax: 'const [state, setState] = useState(initialValue)',
-            examples: [
-                {
-                    title: 'Простой счетчик',
-                    description:
-                        'Базовый пример использования useState для создания счетчика',
-                    code: `import React, { useState } from 'react';
+  {
+    id: 'useState',
+    title: 'useState',
+    description: 'Хук для управления состоянием в функциональных компонентах',
+    category: 'state',
+    difficulty: 'beginner',
+    content: {
+      overview:
+        'useState позволяет добавлять состояние в функциональные компоненты. Он возвращает массив с текущим значением состояния и функцию для его обновления.',
+      syntax: 'const [state, setState] = useState(initialValue)',
+      examples: [
+        {
+          title: 'Простой счетчик',
+          description:
+            'Базовый пример использования useState для создания счетчика',
+          code: `import React, { useState } from 'react';
 
 function Counter() {
   const [count, setCount] = useState(0);
@@ -34,13 +33,12 @@ function Counter() {
     </div>
   );
 }`,
-                    liveExample: true,
-                },
-                {
-                    title: 'Форма с несколькими полями',
-                    description:
-                        'Управление несколькими полями формы с помощью useState',
-                    code: `import React, { useState } from 'react';
+          liveExample: true,
+        },
+        {
+          title: 'Форма с несколькими полями',
+          description: 'Управление несколькими полями формы с помощью useState',
+          code: `import React, { useState } from 'react';
 
 function UserForm() {
   const [formData, setFormData] = useState({
@@ -89,38 +87,37 @@ function UserForm() {
     </form>
   );
 }`,
-                    liveExample: true,
-                },
-            ],
-            tips: [
-                'Всегда используйте функцию обновления состояния при работе с предыдущим значением',
-                'useState не объединяет объекты автоматически - используйте spread оператор',
-                'Инициализация может быть функцией для дорогих вычислений',
-            ],
-            commonMistakes: [
-                'Прямое изменение состояния вместо использования setter функции',
-                'Забывание spread оператора при обновлении объектов',
-                'Использование useState для данных, которые не влияют на рендер',
-            ],
+          liveExample: true,
         },
+      ],
+      tips: [
+        'Всегда используйте функцию обновления состояния при работе с предыдущим значением',
+        'useState не объединяет объекты автоматически - используйте spread оператор',
+        'Инициализация может быть функцией для дорогих вычислений',
+      ],
+      commonMistakes: [
+        'Прямое изменение состояния вместо использования setter функции',
+        'Забывание spread оператора при обновлении объектов',
+        'Использование useState для данных, которые не влияют на рендер',
+      ],
     },
-    {
-        id: 'useEffect',
-        title: 'useEffect',
-        description:
-            'Хук для выполнения побочных эффектов в функциональных компонентах',
-        category: 'effects',
-        difficulty: 'beginner',
-        content: {
-            overview:
-                'useEffect позволяет выполнять побочные эффекты в функциональных компонентах. Он заменяет componentDidMount, componentDidUpdate и componentWillUnmount из классовых компонентов.',
-            syntax: 'useEffect(() => { /* эффект */ }, [dependencies])',
-            examples: [
-                {
-                    title: 'Загрузка данных',
-                    description:
-                        'Получение данных с API при монтировании компонента',
-                    code: `import React, { useState, useEffect } from 'react';
+  },
+  {
+    id: 'useEffect',
+    title: 'useEffect',
+    description:
+      'Хук для выполнения побочных эффектов в функциональных компонентах',
+    category: 'effects',
+    difficulty: 'beginner',
+    content: {
+      overview:
+        'useEffect позволяет выполнять побочные эффекты в функциональных компонентах. Он заменяет componentDidMount, componentDidUpdate и componentWillUnmount из классовых компонентов.',
+      syntax: 'useEffect(() => { /* эффект */ }, [dependencies])',
+      examples: [
+        {
+          title: 'Загрузка данных',
+          description: 'Получение данных с API при монтировании компонента',
+          code: `import React, { useState, useEffect } from 'react';
 
 function UserProfile({ userId }) {
   const [user, setUser] = useState(null);
@@ -155,12 +152,12 @@ function UserProfile({ userId }) {
     </div>
   );
 }`,
-                    liveExample: false,
-                },
-                {
-                    title: 'Подписка на события',
-                    description: 'Подписка и отписка от событий',
-                    code: `import React, { useState, useEffect } from 'react';
+          liveExample: false,
+        },
+        {
+          title: 'Подписка на события',
+          description: 'Подписка и отписка от событий',
+          code: `import React, { useState, useEffect } from 'react';
 
 function WindowSize() {
   const [windowSize, setWindowSize] = useState({
@@ -191,36 +188,36 @@ function WindowSize() {
     </div>
   );
 }`,
-                    liveExample: true,
-                },
-            ],
-            tips: [
-                'Всегда включайте все переменные, используемые в эффекте, в массив зависимостей',
-                'Используйте функцию очистки для отмены подписок и таймеров',
-                'Пустой массив зависимостей означает, что эффект выполнится только при монтировании',
-            ],
-            commonMistakes: [
-                'Забывание массива зависимостей',
-                'Отсутствие функции очистки для подписок',
-                'Бесконечные циклы из-за неправильных зависимостей',
-            ],
+          liveExample: true,
         },
+      ],
+      tips: [
+        'Всегда включайте все переменные, используемые в эффекте, в массив зависимостей',
+        'Используйте функцию очистки для отмены подписок и таймеров',
+        'Пустой массив зависимостей означает, что эффект выполнится только при монтировании',
+      ],
+      commonMistakes: [
+        'Забывание массива зависимостей',
+        'Отсутствие функции очистки для подписок',
+        'Бесконечные циклы из-за неправильных зависимостей',
+      ],
     },
-    {
-        id: 'useContext',
-        title: 'useContext',
-        description: 'Хук для потребления контекста React',
-        category: 'context',
-        difficulty: 'intermediate',
-        content: {
-            overview:
-                'useContext позволяет потреблять контекст React без необходимости вложенности компонентов. Это удобно для передачи данных через дерево компонентов.',
-            syntax: 'const value = useContext(MyContext)',
-            examples: [
-                {
-                    title: 'Тема приложения',
-                    description: 'Переключение между светлой и темной темой',
-                    code: `import React, { createContext, useContext, useState } from 'react';
+  },
+  {
+    id: 'useContext',
+    title: 'useContext',
+    description: 'Хук для потребления контекста React',
+    category: 'context',
+    difficulty: 'intermediate',
+    content: {
+      overview:
+        'useContext позволяет потреблять контекст React без необходимости вложенности компонентов. Это удобно для передачи данных через дерево компонентов.',
+      syntax: 'const value = useContext(MyContext)',
+      examples: [
+        {
+          title: 'Тема приложения',
+          description: 'Переключение между светлой и темной темой',
+          code: `import React, { createContext, useContext, useState } from 'react';
 
 // Создание контекста
 const ThemeContext = createContext();
@@ -270,38 +267,36 @@ function App() {
     </ThemeProvider>
   );
 }`,
-                    liveExample: true,
-                },
-            ],
-            tips: [
-                'Используйте контекст для данных, которые должны быть доступны многим компонентам',
-                'Избегайте частых обновлений контекста - это может привести к перерендерам',
-                'Комбинируйте с useReducer для сложной логики состояния',
-            ],
-            commonMistakes: [
-                'Создание контекста внутри компонента',
-                'Использование контекста для данных, которые редко изменяются',
-                'Забывание обернуть компоненты в Provider',
-            ],
+          liveExample: true,
         },
+      ],
+      tips: [
+        'Используйте контекст для данных, которые должны быть доступны многим компонентам',
+        'Избегайте частых обновлений контекста - это может привести к перерендерам',
+        'Комбинируйте с useReducer для сложной логики состояния',
+      ],
+      commonMistakes: [
+        'Создание контекста внутри компонента',
+        'Использование контекста для данных, которые редко изменяются',
+        'Забывание обернуть компоненты в Provider',
+      ],
     },
-    {
-        id: 'useReducer',
-        title: 'useReducer',
-        description:
-            'Хук для управления сложным состоянием с помощью редьюсера',
-        category: 'state',
-        difficulty: 'intermediate',
-        content: {
-            overview:
-                'useReducer позволяет управлять сложным состоянием компонента с помощью функции-редьюсера. Это альтернатива useState для более сложной логики состояния.',
-            syntax: 'const [state, dispatch] = useReducer(reducer, initialState)',
-            examples: [
-                {
-                    title: 'Список задач (Todo)',
-                    description:
-                        'Управление списком задач с помощью useReducer',
-                    code: `import React, { useReducer, useState } from 'react';
+  },
+  {
+    id: 'useReducer',
+    title: 'useReducer',
+    description: 'Хук для управления сложным состоянием с помощью редьюсера',
+    category: 'state',
+    difficulty: 'intermediate',
+    content: {
+      overview:
+        'useReducer позволяет управлять сложным состоянием компонента с помощью функции-редьюсера. Это альтернатива useState для более сложной логики состояния.',
+      syntax: 'const [state, dispatch] = useReducer(reducer, initialState)',
+      examples: [
+        {
+          title: 'Список задач (Todo)',
+          description: 'Управление списком задач с помощью useReducer',
+          code: `import React, { useReducer, useState } from 'react';
 
 // Начальное состояние
 const initialState = {
@@ -411,37 +406,38 @@ function TodoApp() {
     </div>
   );
 }`,
-                    liveExample: true,
-                },
-            ],
-            tips: [
-                'Используйте useReducer для сложной логики состояния',
-                'Редьюсер должен быть чистой функцией',
-                'Комбинируйте с useContext для глобального состояния',
-            ],
-            commonMistakes: [
-                'Мутация состояния в редьюсере',
-                'Слишком сложные редьюсеры - разбивайте на подредьюсеры',
-                'Использование useReducer для простого состояния',
-            ],
+          liveExample: true,
         },
+      ],
+      tips: [
+        'Используйте useReducer для сложной логики состояния',
+        'Редьюсер должен быть чистой функцией',
+        'Комбинируйте с useContext для глобального состояния',
+      ],
+      commonMistakes: [
+        'Мутация состояния в редьюсере',
+        'Слишком сложные редьюсеры - разбивайте на подредьюсеры',
+        'Использование useReducer для простого состояния',
+      ],
     },
-    {
-        id: 'useCallback',
-        title: 'useCallback',
-        description: 'Хук для мемоизации функций',
-        category: 'performance',
-        difficulty: 'intermediate',
-        content: {
-            overview:
-                'useCallback возвращает мемоизированную версию функции, которая изменяется только при изменении зависимостей. Это полезно для оптимизации производительности.',
-            syntax: 'const memoizedCallback = useCallback(() => { /* функция */ }, [dependencies])',
-            examples: [
-                {
-                    title: 'Оптимизация дочерних компонентов',
-                    description:
-                        'Предотвращение ненужных перерендеров дочерних компонентов',
-                    code: `import React, { useState, useCallback } from 'react';
+  },
+  {
+    id: 'useCallback',
+    title: 'useCallback',
+    description: 'Хук для мемоизации функций',
+    category: 'performance',
+    difficulty: 'intermediate',
+    content: {
+      overview:
+        'useCallback возвращает мемоизированную версию функции, которая изменяется только при изменении зависимостей. Это полезно для оптимизации производительности.',
+      syntax:
+        'const memoizedCallback = useCallback(() => { /* функция */ }, [dependencies])',
+      examples: [
+        {
+          title: 'Оптимизация дочерних компонентов',
+          description:
+            'Предотвращение ненужных перерендеров дочерних компонентов',
+          code: `import React, { useState, useCallback } from 'react';
 
 // Дочерний компонент
 const ExpensiveComponent = React.memo(({ onIncrement, count }) => {
@@ -488,36 +484,37 @@ function ParentComponent() {
     </div>
   );
 }`,
-                    liveExample: true,
-                },
-            ],
-            tips: [
-                'Используйте useCallback только когда это действительно необходимо',
-                'Включайте все переменные, используемые в функции, в массив зависимостей',
-                'Комбинируйте с React.memo для максимальной оптимизации',
-            ],
-            commonMistakes: [
-                'Преждевременная оптимизация - не используйте useCallback везде',
-                'Забывание зависимостей в массиве',
-                'Использование useCallback для простых функций',
-            ],
+          liveExample: true,
         },
+      ],
+      tips: [
+        'Используйте useCallback только когда это действительно необходимо',
+        'Включайте все переменные, используемые в функции, в массив зависимостей',
+        'Комбинируйте с React.memo для максимальной оптимизации',
+      ],
+      commonMistakes: [
+        'Преждевременная оптимизация - не используйте useCallback везде',
+        'Забывание зависимостей в массиве',
+        'Использование useCallback для простых функций',
+      ],
     },
-    {
-        id: 'useMemo',
-        title: 'useMemo',
-        description: 'Хук для мемоизации вычислений',
-        category: 'performance',
-        difficulty: 'intermediate',
-        content: {
-            overview:
-                'useMemo возвращает мемоизированное значение, которое пересчитывается только при изменении зависимостей. Это полезно для дорогих вычислений.',
-            syntax: 'const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b])',
-            examples: [
-                {
-                    title: 'Дорогие вычисления',
-                    description: 'Мемоизация результата дорогих вычислений',
-                    code: `import React, { useState, useMemo } from 'react';
+  },
+  {
+    id: 'useMemo',
+    title: 'useMemo',
+    description: 'Хук для мемоизации вычислений',
+    category: 'performance',
+    difficulty: 'intermediate',
+    content: {
+      overview:
+        'useMemo возвращает мемоизированное значение, которое пересчитывается только при изменении зависимостей. Это полезно для дорогих вычислений.',
+      syntax:
+        'const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b])',
+      examples: [
+        {
+          title: 'Дорогие вычисления',
+          description: 'Мемоизация результата дорогих вычислений',
+          code: `import React, { useState, useMemo } from 'react';
 
 // Имитация дорогого вычисления
 function expensiveCalculation(n) {
@@ -570,13 +567,12 @@ function Calculator() {
     </div>
   );
 }`,
-                    liveExample: true,
-                },
-                {
-                    title: 'Фильтрация и сортировка',
-                    description:
-                        'Мемоизация отфильтрованного и отсортированного списка',
-                    code: `import React, { useState, useMemo } from 'react';
+          liveExample: true,
+        },
+        {
+          title: 'Фильтрация и сортировка',
+          description: 'Мемоизация отфильтрованного и отсортированного списка',
+          code: `import React, { useState, useMemo } from 'react';
 
 function UserList() {
   const [users] = useState([
@@ -648,37 +644,37 @@ function UserList() {
     </div>
   );
 }`,
-                    liveExample: true,
-                },
-            ],
-            tips: [
-                'Используйте useMemo для дорогих вычислений',
-                'Не используйте useMemo для простых операций',
-                'Включайте все зависимости в массив зависимостей',
-            ],
-            commonMistakes: [
-                'Преждевременная оптимизация',
-                'Забывание зависимостей',
-                'Использование useMemo для простых вычислений',
-            ],
+          liveExample: true,
         },
+      ],
+      tips: [
+        'Используйте useMemo для дорогих вычислений',
+        'Не используйте useMemo для простых операций',
+        'Включайте все зависимости в массив зависимостей',
+      ],
+      commonMistakes: [
+        'Преждевременная оптимизация',
+        'Забывание зависимостей',
+        'Использование useMemo для простых вычислений',
+      ],
     },
-    {
-        id: 'useRef',
-        title: 'useRef',
-        description:
-            'Хук для создания изменяемой ссылки, которая сохраняется между рендерами',
-        category: 'refs',
-        difficulty: 'intermediate',
-        content: {
-            overview:
-                'useRef возвращает изменяемый объект, свойство .current которого инициализируется переданным аргументом. Ссылка сохраняется на протяжении всего времени жизни компонента.',
-            syntax: 'const ref = useRef(initialValue)',
-            examples: [
-                {
-                    title: 'Фокус на input',
-                    description: 'Программный фокус на поле ввода',
-                    code: `import React, { useRef } from 'react';
+  },
+  {
+    id: 'useRef',
+    title: 'useRef',
+    description:
+      'Хук для создания изменяемой ссылки, которая сохраняется между рендерами',
+    category: 'refs',
+    difficulty: 'intermediate',
+    content: {
+      overview:
+        'useRef возвращает изменяемый объект, свойство .current которого инициализируется переданным аргументом. Ссылка сохраняется на протяжении всего времени жизни компонента.',
+      syntax: 'const ref = useRef(initialValue)',
+      examples: [
+        {
+          title: 'Фокус на input',
+          description: 'Программный фокус на поле ввода',
+          code: `import React, { useRef } from 'react';
 
 function FocusInput() {
   const inputRef = useRef(null);
@@ -712,12 +708,12 @@ function FocusInput() {
     </div>
   );
 }`,
-                    liveExample: true,
-                },
-                {
-                    title: 'Счетчик рендеров',
-                    description: 'Отслеживание количества рендеров компонента',
-                    code: `import React, { useState, useRef, useEffect } from 'react';
+          liveExample: true,
+        },
+        {
+          title: 'Счетчик рендеров',
+          description: 'Отслеживание количества рендеров компонента',
+          code: `import React, { useState, useRef, useEffect } from 'react';
 
 function RenderCounter() {
   const [count, setCount] = useState(0);
@@ -744,38 +740,38 @@ function RenderCounter() {
     </div>
   );
 }`,
-                    liveExample: true,
-                },
-            ],
-            tips: [
-                'useRef не вызывает перерендер при изменении .current',
-                'Используйте для прямого доступа к DOM элементам',
-                'Можно использовать для хранения любых изменяемых значений',
-            ],
-            commonMistakes: [
-                'Изменение .current в рендере',
-                'Использование useRef вместо useState для данных, влияющих на рендер',
-                'Забывание проверки на существование .current',
-            ],
+          liveExample: true,
         },
+      ],
+      tips: [
+        'useRef не вызывает перерендер при изменении .current',
+        'Используйте для прямого доступа к DOM элементам',
+        'Можно использовать для хранения любых изменяемых значений',
+      ],
+      commonMistakes: [
+        'Изменение .current в рендере',
+        'Использование useRef вместо useState для данных, влияющих на рендер',
+        'Забывание проверки на существование .current',
+      ],
     },
-    {
-        id: 'useImperativeHandle',
-        title: 'useImperativeHandle',
-        description:
-            'Хук для настройки значения, которое передается родительскому компоненту при использовании ref',
-        category: 'refs',
-        difficulty: 'advanced',
-        content: {
-            overview:
-                'useImperativeHandle позволяет настроить экземпляр, который передается родительскому компоненту при использовании ref. Это позволяет родительскому компоненту вызывать методы дочернего компонента.',
-            syntax: 'useImperativeHandle(ref, createHandle, [dependencies])',
-            examples: [
-                {
-                    title: 'Кастомный input',
-                    description:
-                        'Создание кастомного input с методами фокуса и валидации',
-                    code: `import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+  },
+  {
+    id: 'useImperativeHandle',
+    title: 'useImperativeHandle',
+    description:
+      'Хук для настройки значения, которое передается родительскому компоненту при использовании ref',
+    category: 'refs',
+    difficulty: 'advanced',
+    content: {
+      overview:
+        'useImperativeHandle позволяет настроить экземпляр, который передается родительскому компоненту при использовании ref. Это позволяет родительскому компоненту вызывать методы дочернего компонента.',
+      syntax: 'useImperativeHandle(ref, createHandle, [dependencies])',
+      examples: [
+        {
+          title: 'Кастомный input',
+          description:
+            'Создание кастомного input с методами фокуса и валидации',
+          code: `import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 
 // Кастомный input компонент
 const CustomInput = forwardRef((props, ref) => {
@@ -864,37 +860,37 @@ function ParentComponent() {
     </div>
   );
 }`,
-                    liveExample: true,
-                },
-            ],
-            tips: [
-                'Используйте только когда необходимо предоставить API родительскому компоненту',
-                'Включайте все зависимости в массив зависимостей',
-                'Предпочитайте props для передачи данных',
-            ],
-            commonMistakes: [
-                'Злоупотребление useImperativeHandle',
-                'Забывание forwardRef',
-                'Использование для передачи данных вместо API',
-            ],
+          liveExample: true,
         },
+      ],
+      tips: [
+        'Используйте только когда необходимо предоставить API родительскому компоненту',
+        'Включайте все зависимости в массив зависимостей',
+        'Предпочитайте props для передачи данных',
+      ],
+      commonMistakes: [
+        'Злоупотребление useImperativeHandle',
+        'Забывание forwardRef',
+        'Использование для передачи данных вместо API',
+      ],
     },
-    {
-        id: 'useLayoutEffect',
-        title: 'useLayoutEffect',
-        description:
-            'Хук, аналогичный useEffect, но выполняется синхронно после всех DOM мутаций',
-        category: 'effects',
-        difficulty: 'advanced',
-        content: {
-            overview:
-                'useLayoutEffect выполняется синхронно после всех DOM мутаций, но до того, как браузер отрисует изменения. Это полезно для измерений DOM и предотвращения мерцания.',
-            syntax: 'useLayoutEffect(() => { /* эффект */ }, [dependencies])',
-            examples: [
-                {
-                    title: 'Измерение элемента',
-                    description: 'Получение размеров элемента до отрисовки',
-                    code: `import React, { useState, useLayoutEffect, useRef } from 'react';
+  },
+  {
+    id: 'useLayoutEffect',
+    title: 'useLayoutEffect',
+    description:
+      'Хук, аналогичный useEffect, но выполняется синхронно после всех DOM мутаций',
+    category: 'effects',
+    difficulty: 'advanced',
+    content: {
+      overview:
+        'useLayoutEffect выполняется синхронно после всех DOM мутаций, но до того, как браузер отрисует изменения. Это полезно для измерений DOM и предотвращения мерцания.',
+      syntax: 'useLayoutEffect(() => { /* эффект */ }, [dependencies])',
+      examples: [
+        {
+          title: 'Измерение элемента',
+          description: 'Получение размеров элемента до отрисовки',
+          code: `import React, { useState, useLayoutEffect, useRef } from 'react';
 
 function MeasuredComponent() {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -935,37 +931,36 @@ function MeasuredComponent() {
     </div>
   );
 }`,
-                    liveExample: true,
-                },
-            ],
-            tips: [
-                'Используйте useLayoutEffect только когда необходимо предотвратить мерцание',
-                'Предпочитайте useEffect для большинства случаев',
-                'useLayoutEffect блокирует отрисовку браузера',
-            ],
-            commonMistakes: [
-                'Использование useLayoutEffect вместо useEffect',
-                'Выполнение тяжелых операций в useLayoutEffect',
-                'Забывание о блокировке отрисовки',
-            ],
+          liveExample: true,
         },
+      ],
+      tips: [
+        'Используйте useLayoutEffect только когда необходимо предотвратить мерцание',
+        'Предпочитайте useEffect для большинства случаев',
+        'useLayoutEffect блокирует отрисовку браузера',
+      ],
+      commonMistakes: [
+        'Использование useLayoutEffect вместо useEffect',
+        'Выполнение тяжелых операций в useLayoutEffect',
+        'Забывание о блокировке отрисовки',
+      ],
     },
-    {
-        id: 'useDebugValue',
-        title: 'useDebugValue',
-        description: 'Хук для отображения метки в React DevTools',
-        category: 'debugging',
-        difficulty: 'advanced',
-        content: {
-            overview:
-                'useDebugValue может использоваться для отображения метки для кастомных хуков в React DevTools. Это полезно для отладки.',
-            syntax: 'useDebugValue(value, formatFunction?)',
-            examples: [
-                {
-                    title: 'Кастомный хук с отладкой',
-                    description:
-                        'Создание кастомного хука с отладочной информацией',
-                    code: `import React, { useState, useDebugValue } from 'react';
+  },
+  {
+    id: 'useDebugValue',
+    title: 'useDebugValue',
+    description: 'Хук для отображения метки в React DevTools',
+    category: 'debugging',
+    difficulty: 'advanced',
+    content: {
+      overview:
+        'useDebugValue может использоваться для отображения метки для кастомных хуков в React DevTools. Это полезно для отладки.',
+      syntax: 'useDebugValue(value, formatFunction?)',
+      examples: [
+        {
+          title: 'Кастомный хук с отладкой',
+          description: 'Создание кастомного хука с отладочной информацией',
+          code: `import React, { useState, useDebugValue } from 'react';
 
 // Кастомный хук с отладкой
 function useCounter(initialValue = 0) {
@@ -998,70 +993,66 @@ function CounterWithDebug() {
     </div>
   );
 }`,
-                    liveExample: true,
-                },
-            ],
-            tips: [
-                'Используйте только в кастомных хуках',
-                'Функция форматирования выполняется только при открытии DevTools',
-                'Не используйте в продакшене для критичной логики',
-            ],
-            commonMistakes: [
-                'Использование в обычных компонентах',
-                'Выполнение тяжелых операций в функции форматирования',
-                'Злоупотребление отладочной информацией',
-            ],
+          liveExample: true,
         },
+      ],
+      tips: [
+        'Используйте только в кастомных хуках',
+        'Функция форматирования выполняется только при открытии DevTools',
+        'Не используйте в продакшене для критичной логики',
+      ],
+      commonMistakes: [
+        'Использование в обычных компонентах',
+        'Выполнение тяжелых операций в функции форматирования',
+        'Злоупотребление отладочной информацией',
+      ],
     },
+  },
 ];
 
 // Категории хуков
 export const categories = [
-    { id: 'state', name: 'Управление состоянием', color: '#3b82f6' },
-    { id: 'effects', name: 'Побочные эффекты', color: '#10b981' },
-    { id: 'performance', name: 'Производительность', color: '#f59e0b' },
-    { id: 'refs', name: 'Ссылки', color: '#8b5cf6' },
-    { id: 'context', name: 'Контекст', color: '#ef4444' },
-    { id: 'debugging', name: 'Отладка', color: '#6b7280' },
+  { id: 'state', name: 'Управление состоянием', color: '#3b82f6' },
+  { id: 'effects', name: 'Побочные эффекты', color: '#10b981' },
+  { id: 'performance', name: 'Производительность', color: '#f59e0b' },
+  { id: 'refs', name: 'Ссылки', color: '#8b5cf6' },
+  { id: 'context', name: 'Контекст', color: '#ef4444' },
+  { id: 'debugging', name: 'Отладка', color: '#6b7280' },
 ];
 
 // Уровни сложности
 export const difficulties = [
-    { id: 'beginner', name: 'Начинающий', color: '#10b981' },
-    { id: 'intermediate', name: 'Средний', color: '#f59e0b' },
-    { id: 'advanced', name: 'Продвинутый', color: '#ef4444' },
+  { id: 'beginner', name: 'Начинающий', color: '#10b981' },
+  { id: 'intermediate', name: 'Средний', color: '#f59e0b' },
+  { id: 'advanced', name: 'Продвинутый', color: '#ef4444' },
 ];
 
 // Функция для получения хука по ID
-export const getHookById = (id) => {
-    return hooksData.find((hook) => hook.id === id);
+export const getHookById = id => {
+  return hooksData.find(hook => hook.id === id);
 };
 
 // Функция для фильтрации хуков
 export const filterHooks = (filters = {}) => {
-    let filtered = [...hooksData];
+  let filtered = [...hooksData];
 
-    if (filters.category) {
-        filtered = filtered.filter(
-            (hook) => hook.category === filters.category
-        );
-    }
+  if (filters.category) {
+    filtered = filtered.filter(hook => hook.category === filters.category);
+  }
 
-    if (filters.difficulty) {
-        filtered = filtered.filter(
-            (hook) => hook.difficulty === filters.difficulty
-        );
-    }
+  if (filters.difficulty) {
+    filtered = filtered.filter(hook => hook.difficulty === filters.difficulty);
+  }
 
-    if (filters.search) {
-        const searchLower = filters.search.toLowerCase();
-        filtered = filtered.filter(
-            (hook) =>
-                hook.title.toLowerCase().includes(searchLower) ||
-                hook.description.toLowerCase().includes(searchLower) ||
-                hook.content.overview.toLowerCase().includes(searchLower)
-        );
-    }
+  if (filters.search) {
+    const searchLower = filters.search.toLowerCase();
+    filtered = filtered.filter(
+      hook =>
+        hook.title.toLowerCase().includes(searchLower) ||
+        hook.description.toLowerCase().includes(searchLower) ||
+        hook.content.overview.toLowerCase().includes(searchLower)
+    );
+  }
 
-    return filtered;
+  return filtered;
 };
