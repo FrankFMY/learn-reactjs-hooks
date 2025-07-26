@@ -4,26 +4,26 @@
 
 ## 📋 Содержание
 
--   [Предварительные требования](#предварительные-требования)
--   [Локальная разработка](#локальная-разработка)
--   [Сборка для продакшена](#сборка-для-продакшена)
--   [Развертывание на GitHub Pages](#развертывание-на-github-pages)
--   [Развертывание на Vercel](#развертывание-на-vercel)
--   [Развертывание на Netlify](#развертывание-на-netlify)
--   [Развертывание на Firebase Hosting](#развертывание-на-firebase-hosting)
--   [Docker развертывание](#docker-развертывание)
--   [Настройка CI/CD](#настройка-cicd)
--   [Мониторинг и аналитика](#мониторинг-и-аналитика)
--   [Устранение неполадок](#устранение-неполадок)
+- [Предварительные требования](#предварительные-требования)
+- [Локальная разработка](#локальная-разработка)
+- [Сборка для продакшена](#сборка-для-продакшена)
+- [Развертывание на GitHub Pages](#развертывание-на-github-pages)
+- [Развертывание на Vercel](#развертывание-на-vercel)
+- [Развертывание на Netlify](#развертывание-на-netlify)
+- [Развертывание на Firebase Hosting](#развертывание-на-firebase-hosting)
+- [Docker развертывание](#docker-развертывание)
+- [Настройка CI/CD](#настройка-cicd)
+- [Мониторинг и аналитика](#мониторинг-и-аналитика)
+- [Устранение неполадок](#устранение-неполадок)
 
 ## 🔧 Предварительные требования
 
 ### Системные требования
 
--   **Node.js**: версия 18.0.0 или выше
--   **npm**: версия 8.0.0 или выше
--   **Git**: для управления версиями
--   **Docker**: для контейнеризации (опционально)
+- **Node.js**: версия 20.0.0 или выше
+- **npm**: версия 8.0.0 или выше
+- **Git**: для управления версиями
+- **Docker**: для контейнеризации (опционально)
 
 ### Проверка окружения
 
@@ -117,11 +117,11 @@ dist/
 
 ### Оптимизации продакшен сборки
 
--   **Code Splitting**: Автоматическое разделение кода на чанки
--   **Tree Shaking**: Удаление неиспользуемого кода
--   **Minification**: Сжатие JavaScript и CSS
--   **Asset Optimization**: Оптимизация изображений
--   **Gzip Compression**: Сжатие для быстрой загрузки
+- **Code Splitting**: Автоматическое разделение кода на чанки
+- **Tree Shaking**: Удаление неиспользуемого кода
+- **Minification**: Сжатие JavaScript и CSS
+- **Asset Optimization**: Оптимизация изображений
+- **Gzip Compression**: Сжатие для быстрой загрузки
 
 ### Предварительный просмотр сборки
 
@@ -145,51 +145,51 @@ npm run preview
 name: Deploy to GitHub Pages
 
 on:
-    push:
-        branches: [main]
-    pull_request:
-        branches: [main]
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-    build-and-deploy:
-        runs-on: ubuntu-latest
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: '18'
-                  cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
 
-            - name: Install dependencies
-              run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-            - name: Run tests
-              run: npm test
+      - name: Run tests
+        run: npm test
 
-            - name: Run linter
-              run: npm run lint
+      - name: Run linter
+        run: npm run lint
 
-            - name: Build
-              run: npm run build
+      - name: Build
+        run: npm run build
 
-            - name: Deploy to GitHub Pages
-              uses: peaceiris/actions-gh-pages@v3
-              if: github.ref == 'refs/heads/main'
-              with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-                  publish_dir: ./dist
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
 ```
 
 2. **Настройка репозитория**
 
--   Перейдите в Settings → Pages
--   Source: Deploy from a branch
--   Branch: gh-pages
--   Folder: / (root)
+- Перейдите в Settings → Pages
+- Source: Deploy from a branch
+- Branch: gh-pages
+- Folder: / (root)
 
 ### Ручное развертывание
 
@@ -234,9 +234,9 @@ vercel
 
 2. **Настройка через веб-интерфейс**
 
--   Подключите GitHub репозиторий к Vercel
--   Настройте переменные окружения
--   Настройте домен
+- Подключите GitHub репозиторий к Vercel
+- Настройте переменные окружения
+- Настройте домен
 
 ### Конфигурация Vercel
 
@@ -244,26 +244,26 @@ vercel
 
 ```json
 {
-    "buildCommand": "npm run build",
-    "outputDirectory": "dist",
-    "framework": "vite",
-    "rewrites": [
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
         {
-            "source": "/(.*)",
-            "destination": "/index.html"
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         }
-    ],
-    "headers": [
-        {
-            "source": "/assets/(.*)",
-            "headers": [
-                {
-                    "key": "Cache-Control",
-                    "value": "public, max-age=31536000, immutable"
-                }
-            ]
-        }
-    ]
+      ]
+    }
+  ]
 }
 ```
 
@@ -282,16 +282,16 @@ VITE_APP_VERSION=1.0.0
 
 1. **Подключение к Netlify**
 
--   Подключите GitHub репозиторий
--   Настройте команды сборки:
-    -   Build command: `npm run build`
-    -   Publish directory: `dist`
+- Подключите GitHub репозиторий
+- Настройте команды сборки:
+  - Build command: `npm run build`
+  - Publish directory: `dist`
 
 2. **Настройка домена**
 
--   Перейдите в Domain settings
--   Добавьте кастомный домен
--   Настройте SSL сертификат
+- Перейдите в Domain settings
+- Добавьте кастомный домен
+- Настройте SSL сертификат
 
 ### Конфигурация Netlify
 
@@ -345,27 +345,27 @@ firebase init hosting
 
 ```json
 {
-    "hosting": {
-        "public": "dist",
-        "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-        "rewrites": [
-            {
-                "source": "**",
-                "destination": "/index.html"
-            }
-        ],
+  "hosting": {
+    "public": "dist",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/assets/**",
         "headers": [
-            {
-                "source": "/assets/**",
-                "headers": [
-                    {
-                        "key": "Cache-Control",
-                        "value": "public, max-age=31536000, immutable"
-                    }
-                ]
-            }
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
         ]
-    }
+      }
+    ]
+  }
 }
 ```
 
@@ -484,13 +484,13 @@ docker run -d -p 80:80 --name hooks-app learn-reactjs-hooks
 version: '3.8'
 
 services:
-    app:
-        build: .
-        ports:
-            - '80:80'
-        environment:
-            - NODE_ENV=production
-        restart: unless-stopped
+  app:
+    build: .
+    ports:
+      - '80:80'
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
 ```
 
 ## 🔄 Настройка CI
@@ -504,41 +504,41 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   ci:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
-        
-    - name: Install dependencies
-      run: npm ci
-      
-    - name: Run linter
-      run: npm run lint
-      
-    - name: Run tests
-      run: npm test
-      
-    - name: Build
-      run: npm run build
-      
-    - name: Check build output
-      run: |
-        echo "Build completed successfully!"
-        echo "Build directory contents:"
-        ls -la dist/
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Check build output
+        run: |
+          echo "Build completed successfully!"
+          echo "Build directory contents:"
+          ls -la dist/
 ```
 
 ### Переменные окружения
@@ -556,15 +556,16 @@ jobs:
 ```html
 <!-- Google Analytics -->
 <script
-    async
-    src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
+></script>
 <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'GA_MEASUREMENT_ID');
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'GA_MEASUREMENT_ID');
 </script>
 ```
 
@@ -573,14 +574,14 @@ jobs:
 ```javascript
 // Отслеживание изучения хуков
 gtag('event', 'hook_studied', {
-    hook_name: 'useState',
-    study_duration: 300,
+  hook_name: 'useState',
+  study_duration: 300,
 });
 
 // Отслеживание практики
 gtag('event', 'practice_completed', {
-    practice_type: 'interactive_example',
-    completion_time: 120,
+  practice_type: 'interactive_example',
+  completion_time: 120,
 });
 ```
 
@@ -598,9 +599,9 @@ npm install @sentry/react @sentry/tracing
 import * as Sentry from '@sentry/react';
 
 Sentry.init({
-    dsn: 'your-sentry-dsn',
-    integrations: [new Sentry.BrowserTracing()],
-    tracesSampleRate: 1.0,
+  dsn: 'your-sentry-dsn',
+  integrations: [new Sentry.BrowserTracing()],
+  tracesSampleRate: 1.0,
 });
 ```
 
@@ -609,10 +610,10 @@ Sentry.init({
 ```javascript
 // Отслеживание времени загрузки
 window.addEventListener('load', () => {
-    const loadTime = performance.now();
-    gtag('event', 'page_load_time', {
-        load_time: Math.round(loadTime),
-    });
+  const loadTime = performance.now();
+  gtag('event', 'page_load_time', {
+    load_time: Math.round(loadTime),
+  });
 });
 
 // Отслеживание Core Web Vitals
@@ -656,7 +657,7 @@ location / {
 ```json
 // Vercel
 {
-    "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
 ```
 
@@ -667,15 +668,15 @@ location / {
 ```javascript
 // Vite config
 export default defineConfig({
-    build: {
-        rollupOptions: {
-            output: {
-                assetFileNames: 'assets/[name]-[hash][extname]',
-                chunkFileNames: 'assets/[name]-[hash].js',
-                entryFileNames: 'assets/[name]-[hash].js',
-            },
-        },
+  build: {
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+      },
     },
+  },
 });
 ```
 
@@ -706,17 +707,17 @@ npm audit
 
 ### Контакты для поддержки
 
--   **GitHub Issues**: [Создать issue](https://github.com/FrankFMY/learn-reactjs-hooks/issues)
--   **Email**: [pryanishnikovartem@gmail.com]
--   **Discord**: [Сервер сообщества]
+- **GitHub Issues**: [Создать issue](https://github.com/FrankFMY/learn-reactjs-hooks/issues)
+- **Email**: [pryanishnikovartem@gmail.com]
+- **Discord**: [Сервер сообщества]
 
 ---
 
 ## 📚 Дополнительные ресурсы
 
--   [Vite Documentation](https://vitejs.dev/guide/)
--   [React Deployment Guide](https://create-react-app.dev/docs/deployment/)
--   [Netlify Deployment Guide](https://docs.netlify.com/)
--   [Vercel Documentation](https://vercel.com/docs)
--   [Firebase Hosting Guide](https://firebase.google.com/docs/hosting)
--   [Docker Documentation](https://docs.docker.com/)
+- [Vite Documentation](https://vitejs.dev/guide/)
+- [React Deployment Guide](https://create-react-app.dev/docs/deployment/)
+- [Netlify Deployment Guide](https://docs.netlify.com/)
+- [Vercel Documentation](https://vercel.com/docs)
+- [Firebase Hosting Guide](https://firebase.google.com/docs/hosting)
+- [Docker Documentation](https://docs.docker.com/)
